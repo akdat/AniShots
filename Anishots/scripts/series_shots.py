@@ -1,6 +1,7 @@
 from mss import mss
 import mss.tools
 import os.path
+import pyautogui
 
 class ScreenShotMSS:
 
@@ -18,9 +19,10 @@ class FileHandling:
             pass
 
 if __name__ == '__main__':
-    scrn = ScreenShotMSS()
-    scrn.screenshot(20)
-    print('yo')
+    if pyautogui.click():
+
+        scrn = ScreenShotMSS()
+        scrn.screenshot(2)
 
 
 #TODO: ON first Click start taking acreenshots on second click stop
