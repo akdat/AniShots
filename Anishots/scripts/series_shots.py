@@ -4,26 +4,33 @@ import os, os.path
 import errno
 import win32api
 import time
-
+import tkinter as tk
+from tkinter import filedialog
+import timeit
 
 class ScreenShotMSS:
 
     def screenshot(self, amount, i):
+
         with mss.mss() as sct:
             for _ in range(amount):
+                #sct.compression_level = 9 #perhaps in the future set this as input
                 file = sct.shot(output ='run%s.png' %i)
-                print(file)
+
+
 
 class Optimiser:
-
     def lossless(self):
         pass
 
-
 class FileHandling:
 
-    def __init__(self, path):
-        self.path =path
+    def __init__(self):
+        root = tk.Tk()
+        self.path  = filedialog.askdirectory(title ="Select directory")
+            #"C:\\Users\\jalexanu\\Desktop\\ScreenSeries"
+
+        root.withdraw()
 
     def make_dir(self):
 
@@ -33,52 +40,52 @@ class FileHandling:
             os.mkdir(self.path)
             print("Successfully created the directory %s" % self.path)
         except OSError as exc:
+
             if exc.errno == errno.EEXIST and os.path.isdir(self.path):
-                print('here')
                 pass
+
             else:
                 print("Creation of the directory %s failed" % self.path)
-                print('here2')
-                raise
 
     def change_dir(self):
         try:
             os.chdir(self.path)
         except OSError as exc:
-            print('here4')
             raise
-            #if exc.errno =
 
     def make_change(self,):
         self.make_dir()
         self.change_dir()
-        pass
+
+
 
 if __name__ == '__main__':
 
-    folder = FileHandling("C:\\Users\\jalexanu\\Desktop\\ScreenSeries")
-    folder.make_change()
-
-    scrn = ScreenShotMSS()
     i = 0
-    state_left = 1 #left button down
+    state_left = 1  # left button down
+    #frame_ps = float(input("select an interval e.g 0.05 >>\t"))
+
+    #instance creation
+    folder = FileHandling()
+    folder.make_change()
+    scrn = ScreenShotMSS()
 
     time.sleep(1) #temp wait to ensure it doesn't run after the mouse event that clicks compile
 
     while True:
         a = win32api.GetKeyState(0x01)
+
         if a != state_left:
             pass
         else:
             i += 1
             scrn.screenshot(1, i)
 
-        time.sleep(0.1)
+        time.sleep(0.05)
 
 
-
-#TODO: ON first Click(mouse event outside of program) start taking acreenshots on second click stop
-#TODO: output image to file
+#TODO: POST PROCESSING
 #TODO: Image buffer
-#TODO: Optimise images in buffer
+#TODO: SNIP screenshot or area in python
 #TODO: create lineart based on image
+
