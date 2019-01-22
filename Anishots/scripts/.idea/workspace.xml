@@ -32,12 +32,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="744" />
+          <entry key="py" value="1195" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="744" />
+          <entry key="Python" value="1195" />
         </counts>
       </usages-collector>
     </session>
@@ -47,11 +47,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/series_shots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="38" column="8" lean-forward="true" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+            <state relative-caret-position="135">
+              <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
-                <marker date="1548086477213" expanded="true" signature="329:369" ph="..." />
+                <marker date="1548157043196" expanded="true" signature="326:367" ph="..." />
+                <marker date="1548157043196" expanded="true" signature="442:447" ph="..." />
+                <marker date="1548157043196" expanded="true" signature="552:557" ph="..." />
               </folding>
             </state>
           </provider>
@@ -154,10 +156,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-171" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" weight="0.329718" />
@@ -165,7 +166,7 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.46963122" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.46963122" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -184,11 +185,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/series_shots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="38" column="8" lean-forward="true" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+        <state relative-caret-position="135">
+          <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
-            <marker date="1548086477213" expanded="true" signature="329:369" ph="..." />
+            <marker date="1548157043196" expanded="true" signature="326:367" ph="..." />
+            <marker date="1548157043196" expanded="true" signature="442:447" ph="..." />
+            <marker date="1548157043196" expanded="true" signature="552:557" ph="..." />
           </folding>
         </state>
       </provider>

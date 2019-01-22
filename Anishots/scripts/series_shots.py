@@ -1,7 +1,7 @@
 from mss import mss
 import mss.tools
 import os, os.path
-import tempfile
+import errno
 import win32api
 import time
 
@@ -19,38 +19,46 @@ class Optimiser:
     def lossless(self):
         pass
 
+
 class FileHandling:
 
-    path = "tmp/action"
+    def __init__(self, path):
+        self.path =path
 
-    try:
-        os.mkdir(path)
-    except OSError:
-        print("Creation of the directory %s failed" % path)
-    else:
-        print("Successfully created the directory %s" % path)
+    def make_dir(self):
 
-    def on_exists(self, filename):
-        if os.path.exists(filename):
-            pass
+        ''' Open "path" for writing, creating any parent directories as needed. '''
 
-    def mkdir_p(path):
         try:
-            os.makedirs(path)
-        except OSError as exc:  # Python >2.5
-            if exc.errno == errno.EEXIST and os.path.isdir(path):
+            os.mkdir(self.path)
+            print("Successfully created the directory %s" % self.path)
+        except OSError as exc:
+            if exc.errno == errno.EEXIST and os.path.isdir(self.path):
+                print('here')
                 pass
             else:
+                print("Creation of the directory %s failed" % self.path)
+                print('here2')
                 raise
 
-    def safe_open_w(path):
-        ''' Open "path" for writing, creating any parent directories as needed.
-        '''
-        mkdir_p(os.path.dirname(path))
-        return open(path, 'w')
+    def change_dir(self):
+        try:
+            os.chdir(self.path)
+        except OSError as exc:
+            print('here4')
+            raise
+            #if exc.errno =
 
+    def make_change(self,):
+        self.make_dir()
+        self.change_dir()
+        pass
 
 if __name__ == '__main__':
+
+    folder = FileHandling("C:\\Users\\jalexanu\\Desktop\\ScreenSeries")
+    folder.make_change()
+
     scrn = ScreenShotMSS()
     i = 0
     state_left = 1 #left button down
