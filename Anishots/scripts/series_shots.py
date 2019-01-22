@@ -6,30 +6,21 @@ import win32api
 import time
 import tkinter as tk
 from tkinter import filedialog
-import timeit
+
 
 class ScreenShotMSS:
 
     def screenshot(self, amount, i):
-
         with mss.mss() as sct:
             for _ in range(amount):
-                #sct.compression_level = 9 #perhaps in the future set this as input
                 file = sct.shot(output ='run%s.png' %i)
 
-
-
-class Optimiser:
-    def lossless(self):
-        pass
 
 class FileHandling:
 
     def __init__(self):
         root = tk.Tk()
-        self.path  = filedialog.askdirectory(title ="Select directory")
-            #"C:\\Users\\jalexanu\\Desktop\\ScreenSeries"
-
+        self.path  = filedialog.askdirectory(title ="Choose output folder")
         root.withdraw()
 
     def make_dir(self):
@@ -43,7 +34,6 @@ class FileHandling:
 
             if exc.errno == errno.EEXIST and os.path.isdir(self.path):
                 pass
-
             else:
                 print("Creation of the directory %s failed" % self.path)
 
@@ -57,7 +47,9 @@ class FileHandling:
         self.make_dir()
         self.change_dir()
 
-
+class Optimiser:
+    def lossless(self):
+        pass
 
 if __name__ == '__main__':
 
