@@ -15,7 +15,7 @@ class ScreenShotMSS:
         file = []
         with mss.mss() as sct:
             for _ in range(amount):
-                file=sct.shot(output ='run%s.png' %i)
+                file=sct.shot(output ='run%s.png' %i, mon= 2)
 
 
 class FileHandling:
@@ -83,7 +83,7 @@ class Config:
         folder.make_change()
         scrn = ScreenShotMSS()
 
-        time.sleep(1)  # temp wait to ensure it doesn't run after the mouse event that clicks compile
+        time.sleep(5)  # temp wait to ensure it doesn't run after the mouse event that clicks compile
 
         while True:
             a = win32api.GetKeyState(0x01)
@@ -94,12 +94,12 @@ class Config:
                 i += 1
                 scrn.screenshot(1, i)
 
-            time.sleep(0.05)
+            time.sleep(0.005)
 
 
 if __name__ == '__main__':
-    start = PostProcessing()
-    start.crop_im('C:\\Users\\jalexanu\\Desktop\\ScreenSeries\\run1.png')
+    start = Config()
+    start.setup(  )
 
 
 
