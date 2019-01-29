@@ -1,15 +1,20 @@
 import sys
+from mss import mss
+import mss.tools
 from PyQt5 import QtWidgets, QtCore, QtGui
 import tkinter as tk
-from PIL import ImageGrab
-import numpy as np
-import cv2
-
+from tkinter import filedialog
+from PIL import Image
+import os
+import errno
+import time
+import win32api
 
 class MyWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
         root = tk.Tk()
+        root.withdraw()
         screen_width = root.winfo_screenwidth()
         screen_height = root.winfo_screenheight()
         self.setGeometry(0, 0, screen_width, screen_height)
@@ -17,6 +22,7 @@ class MyWidget(QtWidgets.QWidget):
         self.begin = QtCore.QPoint()
         self.end = QtCore.QPoint()
         self.setWindowOpacity(0.3)
+        self.path = filedialog.askdirectory(title="Choose output folder")
         QtWidgets.QApplication.setOverrideCursor(
             QtGui.QCursor(QtCore.Qt.CrossCursor)
         )
@@ -39,22 +45,66 @@ class MyWidget(QtWidgets.QWidget):
         self.end = event.pos()
         self.update()
 
-    def mouseReleaseEvent(self, event):
-        self.close()
 
+    def screenshot(self, amount, i):
+        file = []
+        with mss.mss() as sct:
+            for _ in range(amount):
+                image = 'run%s.png' %i
+                file =sct.shot(output =image, mon= 1)
+
+    def __setup(self):
+        i = 0
+        state_left = 1  # left button down
+        time.sleep(3)  # temp wait to ensure it doesn't run after the mouse event that clicks compile
+
+        while True:
+            a = win32api.GetKeyState(0x01)
+            if a != state_left:
+                print('here')
+                pass
+            else:
+                print('HERE')
+                i += 1
+                self.screenshot(1, i)
+        time.sleep(0.005)
+
+    def make_dir(self):
+        try:
+            os.mkdir(self.path)
+            print("Successfully created the directory %s" % self.path)
+        except OSError as exc:
+            if exc.errno == errno.EEXIST and os.path.isdir(self.path):
+                pass
+            else:
+                print("Creation of the directory %s failed" % self.path)
+
+    def change_dir(self):
+        try:
+            os.chdir(self.path)
+        except OSError as exc:
+            raise
+
+    def make_change(self):
+        self.make_dir()
+        self.change_dir()
+
+    def crop_im(self, image, crop_v):
         x1 = min(self.begin.x(), self.end.x())
         y1 = min(self.begin.y(), self.end.y())
         x2 = max(self.begin.x(), self.end.x())
         y2 = max(self.begin.y(), self.end.y())
 
-        img = ImageGrab.grab(bbox=(x1, y1, x2, y2))
-        img.save('capture.png')
-        img = cv2.cvtColor(np.array(img), cv2.COLOR_BGR2RGB)
+        im = Image.open(image)
+        cropped_image = im.crop((x1, y1, x2, y2))
 
-        cv2.imshow('Captured Image', img)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        cropped_image.save('cropped%s.png' %crop_v)
 
+    def mouseReleaseEvent(self, event):
+        self.close()
+        self.make_change()
+        self.__setup()
+        self.crop_im()
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
